@@ -12,47 +12,33 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <a href="/" className="text-2xl font-bold text-gray-800">
-            imagem
-          </a>
-          <a href="/" className="text-2xl font-bold text-gray-800">
+
+          <a href="/" className="text-2xl font-bold text-gray-800 ml-20">
             Logo
           </a>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-8 mr-30">
           <a
-            href="#home"
+            href="/"
             className="text-gray-700 hover:text-blue-600 transition-colors"
           >
             Home
           </a>
           <a
-            href="#about"
+            href="/produto"
             className="text-gray-700 hover:text-blue-600 transition-colors"
           >
-            Sobre
+            Produto
           </a>
+
           <a
-            href="#services"
-            className="text-gray-700 hover:text-blue-600 transition-colors"
-          >
-            Serviços
-          </a>
-          <a
-            href="#contact"
+            href="/contato"
             className="text-gray-700 hover:text-blue-600 transition-colors"
           >
             Contato
           </a>
-        </div>
-
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-            Começar
-          </button>
         </div>
 
         {/* Mobile Menu Button */}
