@@ -23,7 +23,7 @@ export default function ProdutoPage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Header />
+      <Header ocultarBotaoProduto={true}/>
 
       <main className="container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-6">Produtos</h1>
