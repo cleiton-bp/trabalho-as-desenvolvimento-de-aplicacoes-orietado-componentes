@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "./modal";
 import ConfirmarExclusao from "./confimar-exclusao";
+import ProdutoService from "../utils/services/produtos/produtos.service";
 
 export default function Card({
   produtos,
@@ -25,7 +26,16 @@ export default function Card({
     setProdutoSelecionado(null);
   };
 
-  const handleConfirmExcluir = (id: number) => {
+  const handleConfirmExcluir = async (id: number) => {
+
+    try {
+      const produtoService = new ProdutoService();
+      await produtoService.excluir(id);
+      alert("Produto excluído com sucesso!");
+    } catch (error) {
+      console.error("Erro ao carregar produtos:", error);
+    }
+
     console.log(`Excluindo produto ${produtoSelecionado}`);
     console.log(`Excluindo produto ${id}`);
 
