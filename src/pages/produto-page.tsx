@@ -21,6 +21,16 @@ export default function ProdutoPage() {
     carregarProdutos();
   }, []);
 
+  const handleAtualizarProdutos = async () => {
+    try {
+      const produtoService = new ProdutoService();
+      const dados = await produtoService.listarTodos();
+      setProdutos(dados);
+    } catch (error) {
+      console.error("Erro ao atualizar produtos:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Header ocultarBotaoProduto={true} />
@@ -31,7 +41,10 @@ export default function ProdutoPage() {
         </h1>
 
         <div className="container mx-auto">
-          <Card produtos={produtos} />
+          <Card
+            handleAtualizarProdutos={handleAtualizarProdutos}
+            produtos={produtos}
+          />
         </div>
       </main>
     </div>

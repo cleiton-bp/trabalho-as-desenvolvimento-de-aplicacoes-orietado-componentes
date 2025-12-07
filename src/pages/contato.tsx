@@ -20,10 +20,9 @@ export default function Contato() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     console.log("Form enviado:", form);
-    alert("Mensagem enviada com sucesso!");
     setForm({ nome: "", email: "", mensagem: "" });
   }
 

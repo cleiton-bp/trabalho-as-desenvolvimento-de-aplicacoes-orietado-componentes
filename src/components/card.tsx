@@ -1,8 +1,37 @@
-import { useNavigate } from "react-router-dom";
 import type CardsProdutoProps from "../utils/interfaces/CardsProdutosProps.interface";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Modal from "./modal";
+import ConfirmarExclusao from "./confimar-exclusao";
 
-export default function Card({ produtos }: CardsProdutoProps) {
+export default function Card({
+  produtos,
+  handleAtualizarProdutos,
+}: CardsProdutoProps) {
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [produtoSelecionado, setProdutoSelecionado] = useState<number | null>(
+    null
+  );
+
+  const handleOpenModal = (id: number) => {
+    setProdutoSelecionado(id);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setProdutoSelecionado(null);
+  };
+
+  const handleConfirmExcluir = (id: number) => {
+    console.log(`Excluindo produto ${produtoSelecionado}`);
+    console.log(`Excluindo produto ${id}`);
+
+    handleAtualizarProdutos();
+    handleCloseModal();
+  };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-6">
@@ -35,12 +64,15 @@ export default function Card({ produtos }: CardsProdutoProps) {
               <div className="flex gap-3">
                 <button
                   className="bg-yellow-400 text-gray-800 hover:shadow-sm px-4 py-1.5 rounded-lg hover:bg-yellow-500 transition font-medium shadow-sm cursor-pointer"
-                  onClick={() => navigate(`/produtos/form/${item.id}`)}
+                  onClick={() => navigate(`/produto/form/${item.id}`)}
                 >
                   Editar
                 </button>
 
-                <button className="bg-red-500 text-white px-4 hover:shadow-sm py-1.5 rounded-lg hover:bg-red-600 transition font-medium shadow-sm cursor-pointer">
+                <button
+                  className="bg-red-500 text-white px-4 hover:shadow-sm py-1.5 rounded-lg hover:bg-red-600 transition font-medium shadow-sm cursor-pointer"
+                  onClick={() => handleOpenModal(item.id)}
+                >
                   Excluir
                 </button>
               </div>
@@ -48,6 +80,19 @@ export default function Card({ produtos }: CardsProdutoProps) {
           </div>
         </div>
       ))}
+
+      {/* Modal: Confirmar exclusão */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title="Confirmar exclusão"
+        size="md"
+      >
+        <ConfirmarExclusao
+          handleCloseModal={handleCloseModal}
+          handleConfirmExcluir={handleConfirmExcluir}
+        />
+      </Modal>
     </div>
   );
 }
