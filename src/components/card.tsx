@@ -1,22 +1,43 @@
 import type CardsProdutoProps from "../utils/interfaces/CardsProdutosProps.interface";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "./modal";
 import ConfirmarExclusao from "./confimar-exclusao";
 import ProdutoService from "../utils/services/produtos/produtos.service";
 import { showToast } from "../utils/services/toast.service";
+import type Produto from "../utils/interfaces/Produto.interface";
+import FormProduto from "./form-produto";
 
 export default function Card({
   produtos,
   handleAtualizarProdutos,
 }: CardsProdutoProps) {
-  const navigate = useNavigate();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState<number | null>(
     null
   );
 
+  const [isOpenFormModal, setIsOpenFormModal] = useState(false);
+  const [produtoParaEditar, setProdutoParaEditar] = useState<Produto | null>(
+    null
+  );
+
+  // ---------- Formulário ----------
+  const handleOpenCreate = () => {
+    setProdutoParaEditar(null);
+    setIsOpenFormModal(true);
+  };
+
+  const handleOpenEdit = (produto: Produto) => {
+    setProdutoParaEditar(produto);
+    setIsOpenFormModal(true);
+  };
+
+  const handleCloseForm = () => {
+    setIsOpenFormModal(false);
+    setProdutoParaEditar(null);
+  };
+
+  // ---------- Exclusão ----------
   const handleOpenModal = (id: number) => {
     setProdutoSelecionado(id);
     setIsModalOpen(true);
@@ -42,52 +63,79 @@ export default function Card({
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-6">
-      {produtos.map((item) => (
-        <div
-          key={item.id}
-          className="bg-white rounded-2xl shadow-md transition-shadow duration-300 overflow-hidden flex flex-col border border-gray-100"
+    <div className="p-6">
+      {/* Botão Criar Produto */}
+      <div className="mb-6 flex justify-end -mt-18">
+        <button
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+          onClick={handleOpenCreate}
         >
-          <div className="relative h-52 w-full overflow-hidden">
-            <img
-              src={item.photo_url}
-              alt={item.name}
-              className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
-            />
-          </div>
+          Criar Produto
+        </button>
+      </div>
 
-          <div className="p-5 flex flex-col gap-3 flex-1">
-            <h2 className="text-lg font-semibold text-gray-800 line-clamp-2">
-              {item.name}
-            </h2>
-            <p className="text-gray-600 text-sm line-clamp-3">
-              {item.description}
-            </p>
+      {/* GRID DE PRODUTOS */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {produtos.map((item) => (
+          <div
+            key={item.id}
+            className="bg-white rounded-2xl shadow-md overflow-hidden border hover:shadow-2xl border-gray-100 flex flex-col"
+          >
+            <div className="relative h-52 w-full overflow-hidden">
+              <img
+                src={item.photo_url}
+                alt={item.name}
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+            </div>
 
-            <div className="flex justify-between items-center mt-auto pt-3 border-t">
-              <span className="font-bold text-green-600 text-lg">
-                R$ {item.price}
-              </span>
+            <div className="p-5 flex flex-col gap-3 flex-1">
+              <h2 className="text-lg font-semibold text-gray-800 line-clamp-2">
+                {item.name}
+              </h2>
+              <p className="text-gray-600 text-sm line-clamp-3">
+                {item.description}
+              </p>
 
-              <div className="flex gap-3">
-                <button
-                  className="bg-yellow-400 text-gray-800 hover:shadow-sm px-4 py-1.5 rounded-lg hover:bg-yellow-500 transition font-medium shadow-sm cursor-pointer"
-                  onClick={() => navigate(`/produto/form/${item.id}`)}
-                >
-                  Editar
-                </button>
+              <div className="flex justify-between items-center mt-auto pt-3 border-t">
+                <span className="font-bold text-green-600 text-lg">
+                  R$ {item.price}
+                </span>
 
-                <button
-                  className="bg-red-500 text-white px-4 hover:shadow-sm py-1.5 rounded-lg hover:bg-red-600 transition font-medium shadow-sm cursor-pointer"
-                  onClick={() => handleOpenModal(item.id)}
-                >
-                  Excluir
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    className="bg-yellow-400 text-gray-800 px-4 py-1.5 rounded-lg hover:bg-yellow-500 transition"
+                    onClick={() => handleOpenEdit(item)}
+                  >
+                    Editar
+                  </button>
+
+                  <button
+                    className="bg-red-500 text-white px-4 py-1.5 rounded-lg hover:bg-red-600 transition"
+                    onClick={() => handleOpenModal(item.id)}
+                  >
+                    Excluir
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      {/* Modal Formulário */}
+      <Modal
+        isOpen={isOpenFormModal}
+        onClose={handleCloseForm}
+        title={produtoParaEditar ? "Editar Produto" : "Criar Produto"}
+        size="md"
+      >
+        <FormProduto
+          produto={produtoParaEditar}
+          onSuccess={handleAtualizarProdutos}
+          onClose={handleCloseForm}
+        />
+      </Modal>
 
       {/* Modal: Confirmar exclusão */}
       <Modal
