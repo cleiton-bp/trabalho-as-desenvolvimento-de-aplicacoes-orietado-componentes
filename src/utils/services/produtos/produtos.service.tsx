@@ -8,14 +8,14 @@ export default class ProdutoService {
         name: "Produto A",
         description: "Descrição do Produto A",
         price: 100,
-        photo_url: "https://via.placeholder.com/300",
+        photo_url: "https://picsum.photos/200/400",
       },
       {
         id: 2,
         name: "Produto B",
         description: "Descrição do Produto B",
         price: 200,
-        photo_url: "https://via.placeholder.com/300",
+        photo_url: "https://picsum.photos/200/200",
       },
     ];
     return dados;
