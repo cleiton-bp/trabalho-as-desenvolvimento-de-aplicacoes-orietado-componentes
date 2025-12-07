@@ -4,6 +4,7 @@ import { useState } from "react";
 import Modal from "./modal";
 import ConfirmarExclusao from "./confimar-exclusao";
 import ProdutoService from "../utils/services/produtos/produtos.service";
+import { showToast } from "../utils/services/toast.service";
 
 export default function Card({
   produtos,
@@ -31,9 +32,9 @@ export default function Card({
       const produtoService = new ProdutoService();
       await produtoService.excluir(id);
 
-      console.log(`Produto ${id} excluído`);
+      showToast.success(`Produto excluído com sucesso!`);
     } catch (error) {
-      console.error("Erro ao excluir produto:", error);
+      showToast.error(`Erro ao excluir produto: ${error}`);
     }
 
     handleAtualizarProdutos();
