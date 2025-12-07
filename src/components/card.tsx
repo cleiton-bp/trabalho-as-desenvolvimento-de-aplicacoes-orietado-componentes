@@ -84,7 +84,7 @@ export default function Card({
       {/* Botão Criar Produto */}
       <div className="mb-6 flex justify-end -mt-18">
         <button
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+          className="bg-gray-800 text-white text-base px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition"
           onClick={handleOpenCreate}
         >
           Criar Produto
@@ -151,6 +151,7 @@ export default function Card({
         onClose={handleCloseForm}
         title={produtoParaEditar ? "Editar Produto" : "Criar Produto"}
         size="md"
+        closeOnBackdrop={false}
       >
         <FormProduto
           produto={produtoParaEditar}
@@ -165,6 +166,7 @@ export default function Card({
         onClose={handleCloseModal}
         title="Confirmar exclusão"
         size="md"
+        closeOnBackdrop={false}
       >
         {produtoSelecionado !== null && (
           <ConfirmarExclusao
@@ -180,7 +182,8 @@ export default function Card({
         isOpen={isOpenDetailModal}
         onClose={handleCloseDetail}
         title="Detalhes do Produto"
-        size="md"
+        size="2xl"
+        closeOnBackdrop={false}
       >
         {produtoParaDetalhe && (
           <div className="flex flex-col gap-4">

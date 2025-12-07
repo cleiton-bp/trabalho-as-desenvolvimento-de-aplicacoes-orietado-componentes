@@ -1,0 +1,88 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Produto 1",
+      "price": 19.99,
+      "description": "Descrição do Produto 1",
+      "photo_url": "https://picsum.photos/seed/1/400/300"
+    },
+    {
+      "id": "2",
+      "name": "Produto 2",
+      "price": 29.5,
+      "description": "Descrição do Produto 2",
+      "photo_url": "https://picsum.photos/seed/2/400/300"
+    },
+    {
+      "id": "3",
+      "name": "Produto 3",
+      "price": 15,
+      "description": "Descrição do Produto 3",
+      "photo_url": "https://picsum.photos/seed/3/400/300"
+    },
+    {
+      "id": "4",
+      "name": "Produto 4",
+      "price": 49.9,
+      "description": "Descrição do Produto 4",
+      "photo_url": "https://picsum.photos/seed/4/400/300"
+    },
+    {
+      "id": "5",
+      "name": "Produto 5",
+      "price": 9.99,
+      "description": "Descrição do Produto 5",
+      "photo_url": "https://picsum.photos/seed/5/400/300"
+    },
+    {
+      "id": "6",
+      "name": "Produto 6",
+      "price": 39.9,
+      "description": "Descrição do Produto 6",
+      "photo_url": "https://picsum.photos/seed/6/400/300"
+    },
+    {
+      "id": "7",
+      "name": "Produto 7",
+      "price": 24.75,
+      "description": "Descrição do Produto 7",
+      "photo_url": "https://picsum.photos/seed/7/400/300"
+    },
+    {
+      "id": "8",
+      "name": "Produto 8",
+      "price": 59.99,
+      "description": "Descrição do Produto 8",
+      "photo_url": "https://picsum.photos/seed/8/400/300"
+    },
+    {
+      "id": "9",
+      "name": "Produto 9",
+      "price": 12.49,
+      "description": "Descrição do Produto 9",
+      "photo_url": "https://picsum.photos/seed/9/400/300"
+    },
+    {
+      "id": "10",
+      "name": "Produto 10",
+      "price": 99.9,
+      "description": "Descrição do Produto 10",
+      "photo_url": "https://picsum.photos/seed/10/400/300"
+    },
+    {
+      "id": "11",
+      "name": "Produto 11",
+      "price": 17.2,
+      "description": "Descrição do Produto 11",
+      "photo_url": "https://picsum.photos/seed/11/400/300"
+    },
+    {
+      "id": "12",
+      "name": "Produto 12",
+      "price": 27,
+      "description": "Descrição do Produto 12",
+      "photo_url": "https://picsum.photos/seed/12/400/300"
+    }
+  ]
+}

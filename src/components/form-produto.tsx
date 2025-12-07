@@ -15,7 +15,6 @@ export default function FormProduto({
   onSuccess,
   onClose,
 }: FormProdutoProps) {
-  // Inicializa o estado diretamente
   const [form, setForm] = useState({
     name: produto?.name ?? "",
     price: produto?.price !== undefined ? String(produto.price) : "",
@@ -30,14 +29,20 @@ export default function FormProduto({
   };
 
   const handleSubmit = async () => {
-    const service = new ProdutoService();
+    if (!form.name.trim() || !form.price.trim() || !form.description.trim()) {
+      showToast.warn("Nome, preço e descrição são obrigatórios.");
+      return;
+    }
 
     const payload: ProdutoPayload = {
       ...form,
       price: Number(form.price),
+      photo_url: form.photo_url.trim() || "https://picsum.photos/400/300",
     };
 
     try {
+      const service = new ProdutoService();
+
       if (produto) {
         await service.atualizar(produto.id, payload);
         showToast.success("Produto atualizado!");
@@ -58,40 +63,44 @@ export default function FormProduto({
   return (
     <div className="flex flex-col gap-4">
       <input
+        required
         name="name"
         value={form.name}
         onChange={handleChange}
-        placeholder="Nome"
-        className="border p-2 rounded"
+        placeholder="Nome do produto"
+        className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-gray-50 focus:outline-none transition"
       />
 
       <input
+        required
         name="price"
         value={form.price}
         onChange={handleChange}
         placeholder="Preço"
-        className="border p-2 rounded"
+        className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-gray-50 focus:outline-none transition"
       />
 
       <input
         name="photo_url"
         value={form.photo_url}
         onChange={handleChange}
-        placeholder="URL da imagem"
-        className="border p-2 rounded"
+        placeholder="URL da imagem (opcional)"
+        className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-gray-50 focus:outline-none transition"
       />
 
       <textarea
+        required
         name="description"
         value={form.description}
         onChange={handleChange}
-        placeholder="Descrição"
-        className="border p-2 rounded"
+        placeholder="Descrição (opcional)"
+        rows={4}
+        className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-gray-50 focus:outline-none transition resize-none"
       />
 
       <button
         onClick={handleSubmit}
-        className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        className="bg-gray-800 text-white text-base px-4 py-3 rounded-lg shadow hover:bg-gray-900 transition"
       >
         {produto ? "Salvar alterações" : "Criar produto"}
       </button>

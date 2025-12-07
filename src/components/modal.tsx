@@ -5,12 +5,9 @@ interface ModalProps {
   onClose: () => void;
   title?: string;
   children: ReactNode;
-  size?: "sm" | "md" | "lg" | "xl";
-  /** If true, the backdrop is fully transparent. Default: true */
+  size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   overlayTransparent?: boolean;
-  /** Optional classes to override the backdrop styling */
   overlayClassName?: string;
-  /** Click on backdrop closes the modal. Default: true */
   closeOnBackdrop?: boolean;
 }
 
@@ -31,6 +28,8 @@ export default function Modal({
     md: "max-w-md",
     lg: "max-w-lg",
     xl: "max-w-xl",
+    "2xl": "max-w-2xl",
+    full: "max-w-full",
   };
 
   const overlayComputedClass =
@@ -43,7 +42,11 @@ export default function Modal({
       onClick={closeOnBackdrop ? onClose : undefined}
     >
       <div
-        className={`bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} mx-4`}
+        className={`
+          bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} mx-4
+          max-h-[80vh] overflow-y-auto
+          scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200
+        `}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
