@@ -27,17 +27,14 @@ export default function Card({
   };
 
   const handleConfirmExcluir = async (id: number) => {
-
     try {
       const produtoService = new ProdutoService();
       await produtoService.excluir(id);
-      alert("Produto excluído com sucesso!");
-    } catch (error) {
-      console.error("Erro ao carregar produtos:", error);
-    }
 
-    console.log(`Excluindo produto ${produtoSelecionado}`);
-    console.log(`Excluindo produto ${id}`);
+      console.log(`Produto ${id} excluído`);
+    } catch (error) {
+      console.error("Erro ao excluir produto:", error);
+    }
 
     handleAtualizarProdutos();
     handleCloseModal();
@@ -98,10 +95,13 @@ export default function Card({
         title="Confirmar exclusão"
         size="md"
       >
-        <ConfirmarExclusao
-          handleCloseModal={handleCloseModal}
-          handleConfirmExcluir={handleConfirmExcluir}
-        />
+        {produtoSelecionado !== null && (
+          <ConfirmarExclusao
+            id={produtoSelecionado}
+            handleCloseModal={handleCloseModal}
+            handleConfirmExcluir={handleConfirmExcluir}
+          />
+        )}
       </Modal>
     </div>
   );

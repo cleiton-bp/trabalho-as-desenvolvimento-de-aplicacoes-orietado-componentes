@@ -1,14 +1,10 @@
-interface ConfirmarExclusaoProps {
-  handleCloseModal: () => void;
-  handleConfirmExcluir: (id: number) => void;
-}
+import type { ConfirmarExclusaoProps } from "../utils/interfaces/ConfirmarExclusaoProps.interface";
 
 export default function ConfirmarExclusao({
   handleCloseModal,
   handleConfirmExcluir,
+  id,
 }: ConfirmarExclusaoProps) {
-  const id = 0;
-
   return (
     <div>
       <p className="mb-4 text-gray-700">
@@ -22,9 +18,10 @@ export default function ConfirmarExclusao({
         >
           Cancelar
         </button>
+
         <button
           className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
-          onClick={() => handleConfirmExcluir(id)}
+          onClick={async () => await handleConfirmExcluir(id)}
         >
           Excluir
         </button>
