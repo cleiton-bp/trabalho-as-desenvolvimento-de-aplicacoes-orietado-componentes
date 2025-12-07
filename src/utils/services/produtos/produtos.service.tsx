@@ -1,4 +1,4 @@
-import type Produto from "../../interfaces/Produto";
+import type Produto from "../../interfaces/Produto.interface";
 
 export default class ProdutoService {
   async listarTodos() {

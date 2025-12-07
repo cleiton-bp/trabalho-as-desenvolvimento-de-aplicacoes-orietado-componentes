@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "../components/header.component";
 import Card from "../components/card";
 import ProdutoService from "../utils/services/produtos/produtos.service";
-import type Produto from "../utils/interfaces/Produto";
+import type Produto from "../utils/interfaces/Produto.interface";
 
 export default function ProdutoPage() {
   const [produtos, setProdutos] = useState<Produto[]>([]);

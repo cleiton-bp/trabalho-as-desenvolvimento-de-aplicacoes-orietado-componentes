@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import type CardsProdutoProps from "../utils/interfaces/CardsProdutosProps";
+import type CardsProdutoProps from "../utils/interfaces/CardsProdutosProps.interface";
 
 export default function Card({ produtos }: CardsProdutoProps) {
   const navigate = useNavigate();
@@ -34,13 +34,13 @@ export default function Card({ produtos }: CardsProdutoProps) {
 
               <div className="flex gap-3">
                 <button
-                  className="bg-yellow-400 text-gray-800 hover:shadow-sm px-4 py-1.5 rounded-lg hover:bg-yellow-500 transition font-medium shadow-sm"
+                  className="bg-yellow-400 text-gray-800 hover:shadow-sm px-4 py-1.5 rounded-lg hover:bg-yellow-500 transition font-medium shadow-sm cursor-pointer"
                   onClick={() => navigate(`/produtos/form/${item.id}`)}
                 >
                   Editar
                 </button>
 
-                <button className="bg-red-500 text-white px-4 hover:shadow-sm py-1.5 rounded-lg hover:bg-red-600 transition font-medium shadow-sm">
+                <button className="bg-red-500 text-white px-4 hover:shadow-sm py-1.5 rounded-lg hover:bg-red-600 transition font-medium shadow-sm cursor-pointer">
                   Excluir
                 </button>
               </div>
