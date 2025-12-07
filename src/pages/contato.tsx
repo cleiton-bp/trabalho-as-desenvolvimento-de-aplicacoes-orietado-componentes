@@ -1,4 +1,4 @@
-import Header from "../components/header.component";
+import Header from "../components/header";
 import { useState } from "react";
 
 interface FormData {
